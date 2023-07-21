@@ -10,10 +10,10 @@ void inicializaMemoria(int *memoria) {         // memoria inicialmente "vazia"
 }
 
 int main() {
-    int memoria_ff[TAM];
-    int memoria_bf[TAM];
-    int memoria_wf[TAM];
-    int memoria_cf[TAM];
+    int memoria_ff[TAM];            // first fit
+    int memoria_bf[TAM];            // best fit
+    int memoria_wf[TAM];            // worst fit
+    int memoria_cf[TAM];            // circular fit
 
     inicializaMemoria(memoria_ff);
     inicializaMemoria(memoria_bf);
