@@ -9,6 +9,12 @@ void inicializaMemoria(int *memoria) {         // memoria inicialmente "vazia"
     } 
 }
 
+void imprimeVetor(int *vet) {
+    printf("|");
+    for(int i = 0; i < TAM; i++)
+        printf(" %d |");
+}
+
 int main() {
     int memoria_ff[TAM];            // first fit
     int memoria_bf[TAM];            // best fit
