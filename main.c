@@ -11,10 +11,10 @@ void inicializaMemoria(int *memoria) {         // memoria inicialmente "vazia"
     } 
 }
 
-void imprimeVetor(int *vet) {
+void imprimeVetor(int *vetor) {
     printf("|");
     for(int i = 0; i < TAM; i++)
-        printf(" %d |");
+        printf(" %d |", vetor[i]);
 }
 
 int insereFirstFit(int *vetor, int tamProcesso) {
