@@ -20,17 +20,18 @@ void imprimeVetor(int *vet) {
 int insereFirstFit(int *vetor, int tamProcesso) {
     int qntdBuracosConsecutivos = 0;
     int anterior = -1;                  // valor igual a 0: elemento anterior era buraco
-    int posIncioBuraco;                 // posicao onde comeca uma sequencia de buracos
+    int posIncioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
 
     if(tamProcesso > TAM) return 1;
 
-    for(int i = 0; i < TAM || qntdBuracosConsecutivos != tamProcesso; i++) {
+    for(int i = 0; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
         if(vetor[i] == 0) {
             qntdBuracosConsecutivos++;
             if(anterior != 0) posIncioBuraco = i;
         } else {
             if(anterior == 0) qntdBuracosConsecutivos = 0;
         }
+        anterior = vetor[i];
     }
 
     if(qntdBuracosConsecutivos == tamProcesso) {
