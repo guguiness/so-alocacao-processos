@@ -19,26 +19,26 @@ void imprimeVetor(int *vet) {
 
 int insereFirstFit(int *vetor, int tamProcesso) {
     int qntdBuracosConsecutivos = 0;
-    int anterior = -1;                  // valor igual a 0: elemento anterior era buraco
-    int posIncioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
+    int elementoAnterior = -1;                  // valor igual a 0: elemento elementoAnterior era buraco
+    int indiceInicioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
 
     if(tamProcesso > TAM) return 1;
 
     for(int i = 0; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
         if(vetor[i] == 0) {
             qntdBuracosConsecutivos++;
-            if(anterior != 0) posIncioBuraco = i;
+            if(elementoAnterior != 0) indiceInicioBuraco = i;
         } else {
-            if(anterior == 0) qntdBuracosConsecutivos = 0;
+            if(elementoAnterior == 0) qntdBuracosConsecutivos = 0;
         }
-        anterior = vetor[i];
+        elementoAnterior = vetor[i];
     }
 
     if(qntdBuracosConsecutivos == tamProcesso) {
         // insere o processo no vetor
         int cont = 0;
         qntdProcessos++;            // PID do novo processo
-        for(int i = posIncioBuraco; cont != tamProcesso; i++) {
+        for(int i = indiceInicioBuraco; cont != tamProcesso; i++) {
             vetor[i] = qntdProcessos;
             cont++;
         }
