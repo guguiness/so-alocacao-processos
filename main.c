@@ -1,9 +1,64 @@
 #include <stdio.h>
 #define TAM 10
 
-int qntdProcessos = 0;          // PIDs existentes na memoria (compartilhado??)
+int qntdProcessos = 0;          // PIDs existentes na memoria
 
 // considerar para a memoria: 0 = lacuna / 1 = processo
+
+void mostraMenu() {
+	
+	int opcao = 0;
+	
+	printf("Digite o numero correspondente a opcao desejada: \n");
+	printf("1. Inserir processo na memoria\n");
+	printf("2. Remover processo da memoria\n");
+	printf("3. Listar estado das memorias\n");
+	printf("4. Finalizar aplicacao\n");
+	
+	scanf("%i", &opcao);
+	
+	switch (opcao) {
+		case 1:
+			int tam = 0;
+			printf("Qual o tamanho do processo a ser inserido?\n");
+			scanf("%i", &tam);
+			
+			//insereFirstFit(memoria_ff, tam);
+			//insereBestFit(memoria_bf, tam);
+			//insereWorstFit(memoria_wf, tam);
+			//insereCircularFit(memoria_cf, tam);
+			
+			break;
+			
+		case 2:
+			int pid = 0;
+			printf("Qual o PID do processo a ser removido?\n");
+			scanf("%i", &pid);
+			
+			//removeProcesso(memoria_ff, pid);
+			//removeProcesso(memoria_bf, pid);
+			//removeProcesso(memoria_wf, pid);
+			//removeProcesso(memoria_cf, pid);
+			
+			break;
+			
+		case 3:
+			printf("Memoria First Fit: \n");
+			// funcao
+			printf("Memoria Best Fit: \n");
+			// funcao
+			printf("Memoria Worst Fit: \n");
+			// funcao
+			printf("Memoria Circular Fit: \n");
+			// funcao
+			break;
+		case 4:
+			printf("Aplicacao finalizada\n");
+			exit(0);
+		default:
+			printf("Opcao Invalida");
+	}
+}
 
 void inicializaMemoria(int *memoria) {         // memoria inicialmente "vazia"
     for(int i = 0; i < TAM; i++) {
