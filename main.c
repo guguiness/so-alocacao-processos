@@ -33,11 +33,6 @@ void insereFirstFit(int *vetor, int tamProcesso) {
     int elementoAnterior = -1;                  // valor igual a 0: elemento elementoAnterior era buraco
     int indiceInicioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
 
-    if(tamProcesso > TAM) {
-        printf("Sem espaco suficiente para inserir o processo");
-        return;
-    }
-
     for(int i = 0; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
         if(vetor[i] == 0) {
             qntdBuracosConsecutivos++;
@@ -66,11 +61,6 @@ void insereCircularFit(int *vetor, int tamProcesso) {
     int elementoAnterior = -1;                  // valor igual a 0: elemento elementoAnterior era buraco
     int indiceInicioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
     int i;
-
-    if(tamProcesso > TAM) {
-        printf("Sem espaco suficiente para inserir o processo");
-        return;
-    }
 
     // Primeira busca a partir do indice da ultima alocacao
     for(i = indiceUltimaAlocacao; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
@@ -160,8 +150,13 @@ int main() {
                     break;
                 }
 
+                if(tamProcesso > TAM) {
+                    printf("\nERRO: Sem espaco suficiente para inserir o processo");
+                    break;
+                }
+
                 qntdProcessos++;            // PID do novo processo
-                
+
                 printf("\nFirst Fit: ");
                 insereFirstFit(memoria_ff, tamProcesso);
 
