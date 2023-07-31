@@ -2,6 +2,7 @@
 #define TAM 10
 
 int qntdProcessos = 0;          // PIDs existentes na memoria
+int indiceUltimaAlocacao = 0;   // indice do ultimo buraco preenchido pelo algoritmo Cicular Fit
 
 // considerar para a memoria: 0 = lacuna / 1 = processo
 
@@ -50,11 +51,63 @@ void insereFirstFit(int *vetor, int tamProcesso) {
     if(qntdBuracosConsecutivos == tamProcesso) {
         // insere o processo no vetor
         int cont = 0;
-        qntdProcessos++;            // PID do novo processo
+        // qntdProcessos++;            // PID do novo processo
         for(int i = indiceInicioBuraco; cont != tamProcesso; i++) {
             vetor[i] = qntdProcessos;
             cont++;
         }
+        printf("Processo (%d) adicionado com sucesso", qntdProcessos);
+    } else {
+        printf("Sem espaco suficiente para inserir o processo");
+    }
+}
+
+void insereCircularFit(int *vetor, int tamProcesso) {
+    int qntdBuracosConsecutivos = 0;
+    int elementoAnterior = -1;                  // valor igual a 0: elemento elementoAnterior era buraco
+    int indiceInicioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
+    int i;
+
+    if(tamProcesso > TAM) {
+        printf("Sem espaco suficiente para inserir o processo");
+        return;
+    }
+
+    // Primeira busca a partir do indice da ultima alocacao
+    for(i = indiceUltimaAlocacao; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
+        if(vetor[i] == 0) {
+            qntdBuracosConsecutivos++;
+            if(elementoAnterior != 0) indiceInicioBuraco = i;
+        } else {
+            if(elementoAnterior == 0) qntdBuracosConsecutivos = 0;
+        }
+        elementoAnterior = vetor[i];
+    }
+
+    // Segunda busca a partir do inicio do vetor ate o indice da ultima alocacao
+    if(qntdBuracosConsecutivos != tamProcesso) {
+        qntdBuracosConsecutivos = 0;
+        for(i = 0; i < indiceUltimaAlocacao && qntdBuracosConsecutivos != tamProcesso; i++) {
+            if(vetor[i] == 0) {
+                qntdBuracosConsecutivos++;
+                if(elementoAnterior != 0) indiceInicioBuraco = i;
+            } else {
+                if(elementoAnterior == 0) qntdBuracosConsecutivos = 0;
+            }
+            elementoAnterior = vetor[i];
+        }
+    }
+
+    if(qntdBuracosConsecutivos == tamProcesso) {
+        // insere o processo no vetor
+        int i = 0;
+        int cont = 0;
+        // qntdProcessos++;            // PID do novo processo
+        for(i = indiceInicioBuraco; cont != tamProcesso; i++) {
+            vetor[i] = qntdProcessos;
+            cont++;
+        }
+        indiceUltimaAlocacao = (indiceInicioBuraco + tamProcesso) % TAM;
         printf("Processo (%d) adicionado com sucesso", qntdProcessos);
     } else {
         printf("Sem espaco suficiente para inserir o processo");
@@ -86,12 +139,12 @@ int main() {
     int memoria_ff[TAM];            // first fit
     // int memoria_bf[TAM];            // best fit
     // int memoria_wf[TAM];            // worst fit
-    // int memoria_cf[TAM];            // circular fit
+    int memoria_cf[TAM];            // circular fit
 
     inicializaMemoria(memoria_ff);
     // inicializaMemoria(memoria_bf);
     // inicializaMemoria(memoria_wf);
-    // inicializaMemoria(memoria_cf);
+    inicializaMemoria(memoria_cf);
 
     while(exec == 1) {
         int opcao = 0;
@@ -118,8 +171,8 @@ int main() {
                 // printf("\nWorst Fit: ");
                 //insereWorstFit(memoria_wf, tamProcesso);
 
-                // printf("\nCircular Fit: ");
-                //insereCircularFit(memoria_cf, tamProcesso);
+                printf("\nCircular Fit: ");
+                insereCircularFit(memoria_cf, tamProcesso);
                 
                 break;
                 
@@ -136,8 +189,8 @@ int main() {
                 // printf("\nWorst Fit: ");
                 //removeProcesso(memoria_wf, pid);
 
-                // printf("\nCircular Fit: ");
-                //removeProcesso(memoria_cf, pid);
+                printf("\nCircular Fit: ");
+                removeProcesso(memoria_cf, pid);
                 
                 break;
                 
@@ -151,8 +204,8 @@ int main() {
                 // printf("\nMemoria Worst Fit: ");
                 // imprimeVetor(memoria_wf);
 
-                // printf("\nMemoria Circular Fit: ");
-                // imprimeVetor(memoria_cf);
+                printf("\nMemoria Circular Fit: ");
+                imprimeVetor(memoria_cf);
                 break;
             case 4:             // finalizar aplicacao
                 printf("\n---\tAplicacao finalizada\t---\n");
