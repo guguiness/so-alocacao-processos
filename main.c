@@ -1,8 +1,8 @@
 #include <stdio.h>
 #define TAM 10
 
-int qntdProcessos = 0;          // PIDs existentes na memoria
-int indiceUltimaAlocacao = 0;   // indice do ultimo buraco preenchido pelo algoritmo Cicular Fit
+int qntdProcessos = 0;                          // PIDs existentes na memoria
+int indiceUltimaAlocacao = 0;                   // indice do ultimo buraco preenchido pelo algoritmo Cicular Fit
 
 // considerar para a memoria: 0 = lacuna / 1 = processo
 
@@ -26,12 +26,44 @@ void imprimeVetor(int *vetor) {
     for(int i = 0; i < TAM; i++)
         printf(" %d |", vetor[i]);
     printf("\n");
+
+}
+
+void imprimeMemoria(int *vetor) {
+    int i = 0;
+    while (i < TAM) {
+        int valor = vetor[i];
+
+        if (valor == 0) {
+            // Segmento livre (buraco)
+            int tamBuraco = 0;
+            int j = i;
+            while (j < TAM && vetor[j] == 0) {
+                tamBuraco++;
+                j++;
+            }
+            printf("| B{%d} ", tamBuraco);
+            i = j;
+        } else {
+            // Segmento ocupado (processo)
+            int pid = valor;
+            int tamProcesso = 0;
+            int j = i;
+            while (j < TAM && vetor[j] == pid) {
+                tamProcesso++;
+                j++;
+            }
+            printf("| P%d{%d} ", pid, tamProcesso);
+            i = j;
+        }
+    }
+    printf("|");
 }
 
 void insereFirstFit(int *vetor, int tamProcesso) {
     int qntdBuracosConsecutivos = 0;
-    int elementoAnterior = -1;                  // valor igual a 0: elemento elementoAnterior era buraco
-    int indiceInicioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
+    int elementoAnterior = -1;                 // valor igual a 0: elemento anterior era buraco
+    int indiceInicioBuraco = -1;               // posicao onde comeca uma sequencia de buracos
 
     for(int i = 0; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
         if(vetor[i] == 0) {
@@ -191,16 +223,16 @@ int main() {
                 
             case 3:             // listar processos
                 printf("\nMemoria First Fit: ");
-                imprimeVetor(memoria_ff);
+                imprimeMemoria(memoria_ff);
 
                 // printf("\nMemoria Best Fit: ");
-                // imprimeVetor(memoria_bf);
+                // imprimeMemoria(memoria_bf);
 
                 // printf("\nMemoria Worst Fit: ");
-                // imprimeVetor(memoria_wf);
+                // imprimeMemoria(memoria_wf);
 
                 printf("\nMemoria Circular Fit: ");
-                imprimeVetor(memoria_cf);
+                imprimeMemoria(memoria_cf);
                 break;
             case 4:             // finalizar aplicacao
                 printf("\n---\tAplicacao finalizada\t---\n");
