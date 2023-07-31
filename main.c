@@ -51,7 +51,6 @@ void insereFirstFit(int *vetor, int tamProcesso) {
     if(qntdBuracosConsecutivos == tamProcesso) {
         // insere o processo no vetor
         int cont = 0;
-        // qntdProcessos++;            // PID do novo processo
         for(int i = indiceInicioBuraco; cont != tamProcesso; i++) {
             vetor[i] = qntdProcessos;
             cont++;
@@ -102,7 +101,6 @@ void insereCircularFit(int *vetor, int tamProcesso) {
         // insere o processo no vetor
         int i = 0;
         int cont = 0;
-        // qntdProcessos++;            // PID do novo processo
         for(i = indiceInicioBuraco; cont != tamProcesso; i++) {
             vetor[i] = qntdProcessos;
             cont++;
@@ -127,7 +125,7 @@ void removeProcesso(int *vetor, int pidProcesso) {
 	if(contTamProcesso == 0) {
 		printf("O processo nao existe na memoria\n");
 	} else {
-		printf("Processo (%d) removido com sucesso. Unidades de memoria liberadas: %d\n", qntdProcessos, contTamProcesso);
+		printf("Processo (%d) removido com sucesso. Unidades de memoria liberadas: %d\n", pidProcesso, contTamProcesso);
 	}
 }
 
@@ -161,6 +159,8 @@ int main() {
                     printf("\nERRO: Tamanho invalido");
                     break;
                 }
+
+                qntdProcessos++;            // PID do novo processo
                 
                 printf("\nFirst Fit: ");
                 insereFirstFit(memoria_ff, tamProcesso);
