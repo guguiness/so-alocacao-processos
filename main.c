@@ -24,6 +24,7 @@ void imprimeVetor(int *vetor) {
     printf("|");
     for(int i = 0; i < TAM; i++)
         printf(" %d |", vetor[i]);
+    printf("\n");
 }
 
 int insereFirstFit(int *vetor, int tamProcesso) {
@@ -100,7 +101,7 @@ int main() {
                 printf("Qual o tamanho do processo a ser inserido?\n");
                 scanf("%i", &tam);
                 
-                //insereFirstFit(memoria_ff, tam);
+                insereFirstFit(memoria_ff, tam);
                 //insereBestFit(memoria_bf, tam);
                 //insereWorstFit(memoria_wf, tam);
                 //insereCircularFit(memoria_cf, tam);
@@ -111,7 +112,7 @@ int main() {
                 printf("Qual o PID do processo a ser removido?\n");
                 scanf("%i", &pid);
                 
-                //removeProcesso(memoria_ff, pid);
+                removeProcesso(memoria_ff, pid);
                 //removeProcesso(memoria_bf, pid);
                 //removeProcesso(memoria_wf, pid);
                 //removeProcesso(memoria_cf, pid);
@@ -120,13 +121,16 @@ int main() {
                 
             case 3:             // listar processos
                 printf("Memoria First Fit: \n");
-                // funcao
-                printf("Memoria Best Fit: \n");
-                // funcao
-                printf("Memoria Worst Fit: \n");
-                // funcao
-                printf("Memoria Circular Fit: \n");
-                // funcao
+                imprimeVetor(memoria_ff);
+
+                // printf("Memoria Best Fit: \n");
+                // imprimeVetor(memoria_bf);
+
+                // printf("Memoria Worst Fit: \n");
+                // imprimeVetor(memoria_wf);
+
+                // printf("Memoria Circular Fit: \n");
+                // imprimeVetor(memoria_cf);
                 break;
             case 4:             // finalizar aplicacao
                 printf("Aplicacao finalizada\n");
