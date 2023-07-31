@@ -104,6 +104,23 @@ int insereFirstFit(int *vetor, int tamProcesso) {
     }
 }
 
+void removeProcesso(int *vetor, int pidProcesso) {
+	int contTamProcesso = 0;
+
+	for(int i = 0; i < TAM - 1; i++) {
+		if (vetor[i] == pidProcesso) {
+			vetor[i] = 0;
+			contTamProcesso++;
+		}
+	}
+	
+	if(contTamProcesso == 0) {
+		printf("O processo nao existe na memoria\n");
+	} else {
+		printf("Processo removido com sucesso. Unidades de memoria liberadas: %i\n", contTamProcesso);
+	}
+}
+
 int main() {
     int memoria_ff[TAM];            // first fit
     int memoria_bf[TAM];            // best fit
