@@ -64,7 +64,7 @@ void insereFirstFit(int *vetor, int tamProcesso) {
 void removeProcesso(int *vetor, int pidProcesso) {
 	int contTamProcesso = 0;
 
-	for(int i = 0; i < TAM - 1; i++) {
+	for(int i = 0; i < TAM; i++) {
 		if (vetor[i] == pidProcesso) {
 			vetor[i] = 0;
 			contTamProcesso++;
