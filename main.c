@@ -79,7 +79,7 @@ void removeProcesso(int *vetor, int pidProcesso) {
 }
 
 int main() {
-    int tam = 0;
+    int tamProcesso = 0;
     int pid = 0;
     int exec = 1;
 
@@ -102,19 +102,24 @@ int main() {
         switch (opcao) {
             case 1:             // inserir processo
                 printf("\nDigite o tamanho do processo a ser inserido: ");
-                scanf("%i", &tam);
+                scanf("%i", &tamProcesso);
+
+                if(tamProcesso <= 0) {
+                    printf("\nERRO: Tamanho invalido");
+                    break;
+                }
                 
                 printf("\nFirst Fit: ");
-                insereFirstFit(memoria_ff, tam);
+                insereFirstFit(memoria_ff, tamProcesso);
 
                 // printf("\nBest Fit: ");
-                //insereBestFit(memoria_bf, tam);
+                //insereBestFit(memoria_bf, tamProcesso);
 
                 // printf("\nWorst Fit: ");
-                //insereWorstFit(memoria_wf, tam);
+                //insereWorstFit(memoria_wf, tamProcesso);
 
                 // printf("\nCircular Fit: ");
-                //insereCircularFit(memoria_cf, tam);
+                //insereCircularFit(memoria_cf, tamProcesso);
                 
                 break;
                 
