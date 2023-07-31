@@ -6,7 +6,7 @@ int qntdProcessos = 0;          // PIDs existentes na memoria
 // considerar para a memoria: 0 = lacuna / 1 = processo
 
 void mostraMenu() {
-    printf("\n---\tOpcoes disponiveis:\t---\n");
+    printf("\n\n---\tOpcoes disponiveis:\t---\n");
 	printf("[1] Inserir processo na memoria\n");
 	printf("[2] Remover processo da memoria\n");
 	printf("[3] Listar estado das memorias\n");
@@ -27,12 +27,15 @@ void imprimeVetor(int *vetor) {
     printf("\n");
 }
 
-int insereFirstFit(int *vetor, int tamProcesso) {
+void insereFirstFit(int *vetor, int tamProcesso) {
     int qntdBuracosConsecutivos = 0;
     int elementoAnterior = -1;                  // valor igual a 0: elemento elementoAnterior era buraco
     int indiceInicioBuraco = -1;                 // posicao onde comeca uma sequencia de buracos
 
-    if(tamProcesso > TAM) return 1;
+    if(tamProcesso > TAM) {
+        printf("Sem espaco suficiente para inserir o processo");
+        return;
+    }
 
     for(int i = 0; i < TAM && qntdBuracosConsecutivos != tamProcesso; i++) {
         if(vetor[i] == 0) {
@@ -52,10 +55,9 @@ int insereFirstFit(int *vetor, int tamProcesso) {
             vetor[i] = qntdProcessos;
             cont++;
         }
-        return 0;
+        printf("Processo (%d) adicionado com sucesso", qntdProcessos);
     } else {
-        // sem espaco suficiente
-        return 1;
+        printf("Sem espaco suficiente para inserir o processo");
     }
 }
 
@@ -72,7 +74,7 @@ void removeProcesso(int *vetor, int pidProcesso) {
 	if(contTamProcesso == 0) {
 		printf("O processo nao existe na memoria\n");
 	} else {
-		printf("Processo removido com sucesso. Unidades de memoria liberadas: %i\n", contTamProcesso);
+		printf("Processo (%d) removido com sucesso. Unidades de memoria liberadas: %d\n", qntdProcessos, contTamProcesso);
 	}
 }
 
@@ -102,9 +104,16 @@ int main() {
                 printf("\nDigite o tamanho do processo a ser inserido: ");
                 scanf("%i", &tam);
                 
+                printf("\nFirst Fit: ");
                 insereFirstFit(memoria_ff, tam);
+
+                // printf("\nBest Fit: ");
                 //insereBestFit(memoria_bf, tam);
+
+                // printf("\nWorst Fit: ");
                 //insereWorstFit(memoria_wf, tam);
+
+                // printf("\nCircular Fit: ");
                 //insereCircularFit(memoria_cf, tam);
                 
                 break;
