@@ -6,11 +6,11 @@ int qntdProcessos = 0;          // PIDs existentes na memoria
 // considerar para a memoria: 0 = lacuna / 1 = processo
 
 void mostraMenu() {
-    printf("Opcoes disponiveis:\n");
-	printf("1. Inserir processo na memoria\n");
-	printf("2. Remover processo da memoria\n");
-	printf("3. Listar estado das memorias\n");
-	printf("4. Finalizar aplicacao\n");
+    printf("\n---\tOpcoes disponiveis:\t---\n");
+	printf("[1] Inserir processo na memoria\n");
+	printf("[2] Remover processo da memoria\n");
+	printf("[3] Listar estado das memorias\n");
+	printf("[4] Finalizar aplicacao\n");
     printf("\nDigite o numero correspondente a opcao desejada: ");
 }
 
@@ -77,7 +77,6 @@ void removeProcesso(int *vetor, int pidProcesso) {
 }
 
 int main() {
-	int opcao = 0;
     int tam = 0;
     int pid = 0;
     int exec = 1;
@@ -93,12 +92,14 @@ int main() {
     // inicializaMemoria(memoria_cf);
 
     while(exec == 1) {
+        int opcao = 0;
+
         mostraMenu();
         scanf("%i", &opcao);
         
         switch (opcao) {
             case 1:             // inserir processo
-                printf("Qual o tamanho do processo a ser inserido?\n");
+                printf("\nDigite o tamanho do processo a ser inserido: ");
                 scanf("%i", &tam);
                 
                 insereFirstFit(memoria_ff, tam);
@@ -109,35 +110,42 @@ int main() {
                 break;
                 
             case 2:             // remover processo
-                printf("Qual o PID do processo a ser removido?\n");
+                printf("\nDigite o PID do processo a ser removido: ");
                 scanf("%i", &pid);
                 
+                printf("\nFirst Fit: ");
                 removeProcesso(memoria_ff, pid);
+
+                // printf("\nBest Fit: ");
                 //removeProcesso(memoria_bf, pid);
+
+                // printf("\nWorst Fit: ");
                 //removeProcesso(memoria_wf, pid);
+
+                // printf("\nCircular Fit: ");
                 //removeProcesso(memoria_cf, pid);
                 
                 break;
                 
             case 3:             // listar processos
-                printf("Memoria First Fit: \n");
+                printf("\nMemoria First Fit: ");
                 imprimeVetor(memoria_ff);
 
-                // printf("Memoria Best Fit: \n");
+                // printf("\nMemoria Best Fit: ");
                 // imprimeVetor(memoria_bf);
 
-                // printf("Memoria Worst Fit: \n");
+                // printf("\nMemoria Worst Fit: ");
                 // imprimeVetor(memoria_wf);
 
-                // printf("Memoria Circular Fit: \n");
+                // printf("\nMemoria Circular Fit: ");
                 // imprimeVetor(memoria_cf);
                 break;
             case 4:             // finalizar aplicacao
-                printf("Aplicacao finalizada\n");
+                printf("\n---\tAplicacao finalizada\t---\n");
                 exec = 0;
                 break;
             default:
-                printf("Opcao Invalida");
+                printf("\nOpcao invalida, tente novamente.\n");
         }
     }
 
