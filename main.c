@@ -147,7 +147,7 @@ void insereWorstFit(int *vetor, int tamProcesso) {
                     indiceInicioPior = indiceInicioBuraco;
                     qntdBuracosPior = qntdBuracosConsecutivos;
             		existePior = 1;										// valor = 1: ha uma pior escolha disponivel para alocar o processo
-            		//if (qntdBuracosPior == tamProcesso) break;		// caso a aplicacao parasse após encontrar um buraco com tamanho exatamente igual ao do processo
+            		//if (qntdBuracosPior == tamProcesso) break;		// caso a aplicacao parasse apÃ³s encontrar um buraco com tamanho exatamente igual ao do processo
                 }
                 qntdBuracosConsecutivos = 0;
             }
@@ -334,7 +334,9 @@ int main() {
                 exec = 0;
                 break;
             default:
-                printf("\nOpcao invalida, tente novamente.\n");
+                printf("\nOpcao invalida, aplicacao encerrada.\n");
+		exec = 0;
+		break;
         }
     }
 
