@@ -237,12 +237,11 @@ int main() {
     int exec = 1;
 
     while(1) {
-        printf("Digite o tamanho das memorias: ");
+        printf("\nDigite o tamanho das memorias: ");
         scanf("%i", &tamMemoria);
         if(tamMemoria > 0) break;
-        printf("\nERRO: tamanho de memoria invalido. Tente novamente");
+        printf("\nERRO: tamanho de memoria invalido. Tente novamente\n");
     }
-    printf("\n%i", tamMemoria);
 
     int *memoria_ff = (int *)malloc(sizeof(int) * tamMemoria);
     int *memoria_bf = (int *)malloc(sizeof(int) * tamMemoria);
