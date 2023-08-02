@@ -114,7 +114,7 @@ void insereBestFit(int *vetor, int tamProcesso) {
         elementoAnterior = vetor[i];
 	}
 
-	if(qntdBuracosMelhor != 0 && existeMelhor == 1) {
+	if(existeMelhor == 1) {
 		// insere o processo no vetor
 		int cont = 0;
 		for(int i = indiceInicioMelhor; cont != tamProcesso; i++) {
