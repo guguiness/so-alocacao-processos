@@ -44,7 +44,7 @@ void imprimeMemoria(int *vetor) {
                 tamBuraco++;
                 j++;
             }
-            printf("| B{%d} ", tamBuraco);
+            printf("| B<%d> ", tamBuraco);
             i = j;
         } else {
             // Segmento ocupado (processo)
@@ -55,7 +55,7 @@ void imprimeMemoria(int *vetor) {
                 tamProcesso++;
                 j++;
             }
-            printf("| P%d{%d} ", pid, tamProcesso);
+            printf("| P%d<%d> ", pid, tamProcesso);
             i = j;
         }
     }
@@ -147,7 +147,7 @@ void insereWorstFit(int *vetor, int tamProcesso) {
                     indiceInicioPior = indiceInicioBuraco;
                     qntdBuracosPior = qntdBuracosConsecutivos;
             		existePior = 1;										// valor = 1: ha uma pior escolha disponivel para alocar o processo
-            		//if (qntdBuracosPior == tamProcesso) break;		// caso a aplicacao parasse após encontrar um buraco com tamanho exatamente igual ao do processo
+            		//if (qntdBuracosPior == tamProcesso) break;		// caso a aplicacao parasse apos encontrar um buraco com tamanho exatamente igual ao do processo
                 }
                 qntdBuracosConsecutivos = 0;
             }
@@ -313,15 +313,19 @@ int main() {
             case 3:             // listar processos
                 printf("\n-----------------------------------");
                 printf("\n[First Fit]\t");
+                // imprimeVetor(memoria_ff);
                 imprimeMemoria(memoria_ff);
 
                 printf("\n[Best Fit]\t");
+                // imprimeVetor(memoria_bf);
                 imprimeMemoria(memoria_bf);
 
                 printf("\n[Worst Fit]\t");
+                // imprimeVetor(memoria_wf);
                 imprimeMemoria(memoria_wf);
 
                 printf("\n[Circular Fit]\t");
+                // imprimeVetor(memoria_cf);
                 imprimeMemoria(memoria_cf);
                 break;
             case 4:             // finalizar aplicacao
@@ -335,8 +339,8 @@ int main() {
                 break;
             default:
                 printf("\nOpcao invalida, aplicacao encerrada.\n");
-		exec = 0;
-		break;
+                exec = 0;
+                break;
         }
     }
 
