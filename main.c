@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define COR_BURACO "\033[30;44m"
+#define COR_PROCESSO "\033[30;47m"
+#define COR_PADRAO "\033[m"
 
 int tamMemoria = 0;
 int qntdProcessos = 0;                          // PIDs existentes na memoria
@@ -44,7 +47,7 @@ void imprimeMemoria(int *vetor) {
                 tamBuraco++;
                 j++;
             }
-            printf("| B<%d> ", tamBuraco);
+            printf("%s|%s B<%d> ", COR_PADRAO, COR_BURACO, tamBuraco);
             i = j;
         } else {
             // Segmento ocupado (processo)
@@ -55,11 +58,11 @@ void imprimeMemoria(int *vetor) {
                 tamProcesso++;
                 j++;
             }
-            printf("| P%d<%d> ", pid, tamProcesso);
+            printf("%s|%s P%d<%d> ", COR_PADRAO, COR_PROCESSO, pid, tamProcesso);
             i = j;
         }
     }
-    printf("|");
+    printf("%s|", COR_PADRAO);
 }
 
 void insereFirstFit(int *vetor, int tamProcesso) {
