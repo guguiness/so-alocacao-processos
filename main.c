@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define COR_BURACO "\033[30;44m"
+#define COR_BURACO "\033[30;46m"
 #define COR_PROCESSO "\033[30;47m"
 #define COR_PADRAO "\033[m"
 
@@ -274,22 +274,22 @@ int main() {
                 }
 
                 if(tamProcesso > tamMemoria) {
-                    printf("\nERRO: Sem espaco suficiente para inserir o processo");
+                    printf("\nERRO: Sem espaco suficiente para inserir o processo em nenhuma das memorias");
                     break;
                 }
 
                 qntdProcessos++;            // PID do novo processo
 
-                printf("\nFirst Fit: ");
+                printf("\n[First Fit]\t");
                 insereFirstFit(memoria_ff, tamProcesso);
 
-                printf("\nBest Fit: ");
+                printf("\n[Best Fit]\t");
                 insereBestFit(memoria_bf, tamProcesso);
 
-                printf("\nWorst Fit: ");
+                printf("\n[Worst Fit]\t");
                 insereWorstFit(memoria_wf, tamProcesso);
 
-                printf("\nCircular Fit: ");
+                printf("\n[Circular Fit]\t");
                 insereCircularFit(memoria_cf, tamProcesso);
                 
                 break;
@@ -299,16 +299,16 @@ int main() {
                 printf("\nDigite o PID do processo a ser removido: ");
                 scanf("%i", &pid);
                 
-                printf("\nFirst Fit: ");
+                printf("\n[First Fit]\t");
                 removeProcesso(memoria_ff, pid);
 
-                printf("\nBest Fit: ");
+                printf("\n[Best Fit]\t");
                 removeProcesso(memoria_bf, pid);
 
-                printf("\nWorst Fit: ");
+                printf("\n[Worst Fit]\t");
                 removeProcesso(memoria_wf, pid);
 
-                printf("\nCircular Fit: ");
+                printf("\n[Circular Fit]\t");
                 removeProcesso(memoria_cf, pid);
                 
                 break;
