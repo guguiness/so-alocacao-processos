@@ -227,7 +227,7 @@ void removeProcesso(int *vetor, int pidProcesso) {
 		}
 	}
 	
-	if(contTamProcesso == 0) {
+	if(contTamProcesso == 0 || pidProcesso == 0) {
 		printf("O processo nao existe na memoria");
 	} else {
 		printf("Processo (%d) removido com sucesso. Unidades de memoria liberadas: %d", pidProcesso, contTamProcesso);
@@ -341,8 +341,7 @@ int main() {
                 exec = 0;
                 break;
             default:
-                printf("\nOpcao invalida, aplicacao encerrada.\n");
-                exec = 0;
+                printf("\nOpcao invalida. Tente novamente.\n");
                 break;
         }
     }
